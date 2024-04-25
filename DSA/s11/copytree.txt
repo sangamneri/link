@@ -1,0 +1,107 @@
+#include<stdio.h>
+#include<malloc.h>
+struct node
+{
+int data;
+struct node *left,*right;
+};
+
+struct node *create(struct node *root)
+{
+struct node *nw=NULL,*ptr=NULL;
+int i,n;
+printf("\n How many values");
+scanf("%d",&n);
+printf("\nEnter actual values");
+for(i=0;i<n;i++)
+{
+nw=(struct node *)malloc(sizeof(struct node));
+scanf("%d",&nw->data);
+nw->left=nw->right=NULL;
+if(root==NULL)
+root=nw;
+else
+{
+ptr=root;
+while(ptr!=NULL)
+{
+if(nw->data<ptr->data)
+{
+if(ptr->left==NULL)
+{
+ptr->left=nw;
+break;
+}
+else
+ptr=ptr->left;
+}
+else if(nw->data>ptr->data)
+{
+if(ptr->right==NULL)
+{
+ptr->right=nw;
+break;
+}
+else
+ptr=ptr->right;
+}
+}
+}
+}
+return(root);
+}
+
+void inorder(struct node *root)
+{
+struct node *ptr=NULL;
+ptr=root;
+if(ptr!=NULL)
+{
+inorder(ptr->left);
+printf("%d\t",ptr->data);
+inorder(ptr->right);
+}
+}
+
+struct node *treecopy(struct node *root)
+{
+struct node *nw=NULL;
+if(root==NULL)
+return NULL;
+else
+{
+nw=(struct node*)malloc(sizeof(struct node));
+nw->data=root->data;
+nw->left=treecopy(root->left);
+nw->right=treecopy(root->right);
+return nw;
+}
+}
+#include<stdio.h>
+#include<malloc.h>
+void main()
+{
+struct node *create();
+void inorder();
+struct node *treecopy();
+struct node *root1=NULL,*root2=NULL;
+int ch,q=0;
+do
+{
+printf("\n1.create\n2.Inorder \n3.copy a tree \n4.exit");
+printf("\n enter your choice");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:root1=create(root1);
+break;
+case 2:inorder(root1);
+break;
+case 3:root2=treecopy(root1);
+inorder(root2);
+break;
+case 4:q=1;
+break;
+}
+}while(q==0);
+}

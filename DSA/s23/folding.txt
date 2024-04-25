@@ -1,0 +1,142 @@
+#include<stdio.h>
+void division()
+{
+int a[10],flag[10],i,n,key,x,l;
+printf("\n How many key value ");
+scanf("%d",&n);
+for(i=0;i<10;i++)
+{ a[i]=0;
+flag[i]=0;
+} for(i=0;i<n;i++)
+{ scanf("%d",&key);
+l=key;
+x=key%11;
+if(a[x]==0)
+a[x]=key;
+else
+flag[x]=-1;
+} printf("\nThe contents hash table are \n");
+for(i=0;i<10;i++)
+{ if(flag[i]==-1)
+{
+printf("\n%d = collision",i);
+}
+else
+{
+printf("\n%d = %d",i,a[i]);
+}}
+} void midsquare()
+{
+int c[10],flag[10],i,n,sum,x,key,l;
+printf("\n How many values");
+scanf("%d", &n);
+for(i=0;i<10;i++)
+{ c[i]=0;
+flag[i]=0;
+} printf("Enter key values ");
+for(i=0;i<n;i++)
+{
+scanf("%d",&key);
+l=key;
+sum=key*key;
+key=sum;
+if(sum>=10)
+{
+if(sum>=100)
+{
+do
+{
+sum=key%10;
+key=key/10;
+}while(key>10);
+}
+else
+{
+do
+{
+sum=key%10;
+key=key/10;
+sum=key;
+}while(key>10);
+}
+if(c[sum]==0)
+{
+c[sum]=l;
+}
+else
+{
+flag[sum]=-1;
+}
+}
+}
+printf("\n The contents of hash table are ");
+for(i=0;i<10;i++)
+{ if(flag[i]==-1)
+{ printf("\n%d=collision",i);}
+else{
+printf(" \n%d = %d ",i,c[i]);
+}}
+} void folding()
+{
+int b[10],flag[10],sum,l,x,key,n,i;
+for(i=0;i<10;i++)
+{ b[i]=0;
+flag[i]=0;
+} printf("\nHow many values ");
+scanf("%d",&n);
+printf("\n Enter key values ");
+for(i=0;i<n;i++)
+{ scanf("%d",&key);
+l=key;
+sum=0;
+while(key>0)
+{ x=key%10;
+sum=sum+x;
+key=key/10;
+} if(sum<10)
+sum=sum;
+else
+{ key=sum;
+while(key>10)
+{ sum=key%10;
+key=key/10;
+}} if(b[sum]==0)
+{ b[sum]=l;
+} else
+{ flag[sum]=-1;
+}} printf("\nThe content of hash table are \n");
+for(i=0;i<10;i++)
+{ if(flag[i]==-1)
+{
+printf("\n %d = collision",i);
+} else
+{
+printf("\n %d = %d ",i,b[i]);
+}}
+}
+void main()
+{
+int ch,q=0;
+void division();
+void midsquare();
+void folding();
+do{
+printf("\n\n1.Division\n2.midsquare\n3.folding\n4.exit");
+printf("\n\nEnter your choice");
+scanf("%d",&ch);
+switch(ch)
+{ case 1:
+division();
+break;
+case 2:
+midsquare();
+break;
+case 3:
+folding();
+break;
+case 4:
+q=1;
+break;
+} }
+while(q==0);
+}
